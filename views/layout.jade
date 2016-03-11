@@ -3,5 +3,8 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+    link(rel='stylesheet', href='/stylesheets/materialize.css')
+  body(class='brown lighten-4')
     block content
+    script(src='/js/jquery.js')
+    script(src='/js/materialize.js')

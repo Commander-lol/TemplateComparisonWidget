@@ -1,7 +1,14 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
-  code
-    pre #{src}
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/materialize.css')
+  body
+    h1= title
+    p Welcome to #{title}
+    code
+      pre #{src}
+      
+    script(src='/js/jquery.js')
+    script(src='/js/materialize.js')

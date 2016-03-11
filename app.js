@@ -1,11 +1,11 @@
 "use strict";
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var fs = require('fs');
+const express = require('express'),
+    path = require('path'),
+    favicon = require('serve-favicon'),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    fs = require('fs');
 
 var cons = require('consolidate');
 
@@ -18,10 +18,13 @@ const data = {
 
 const exts = {
   "jade": "jade",
-  "ejs": "ejs"
+  "ejs": "ejs",
+  "sideburns": "sb",
+  "haml": "haml",
+  "twig": "twig"
 }
 
-app.set('view engine', 'html');
+app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 
 // uncomment after placing your favicon in /public
@@ -32,15 +35,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("/:engine/:file", function(req, res) {
-  console.log(req.params.engine, req.params.file);
-  let filepath = path.join(__dirname, "views", req.params.engine,
-                            req.params.file + "." + exts[req.params.engine]);
+app.use("/", require("./routes/main"));
 
-  let filesrc = fs.readFileSync(filepath);
-  let local = Object.assign(data);
+app.get("/:engine/:file", function(req, res) {
+  const engine = req.params.engine,
+        file = req.params.file;
+  var filepath,
+      filesrc,
+      local,
+      t;
+  filepath = path.join(__dirname, "views", engine, file + "." + exts[engine]);
+  filesrc = fs.readFileSync(filepath);
+  local = Object.assign(data);
   local.src = filesrc.toString();
-  let t = cons[req.params.engine](filepath, local);
+  if(engine === "sideburns") {
+
+  } else {
+    t = cons[engine](filepath, local);
+  }
   t.then(f => res.end(f));
 });
 

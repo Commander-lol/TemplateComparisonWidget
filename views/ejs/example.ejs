@@ -2,13 +2,13 @@
 <html>
 <head>
   <title><%- title %></title>
-  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <%- pregen.head %>
 </head>
+  <%- pregen.header %>
   <h1><%- title %></h1>
   <p>
     Welcome to <%= title %>
   </p>
-  <code><pre>
-    <%= src %>
-  </pre></code>
+  <%- pregen.src %>
+  <%- pregen.footer %>
 </html>

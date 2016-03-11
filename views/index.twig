@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <link rel="stylesheet" href="/stylesheets/materialize.css"/>
+  </head>
+  <body class="brown lighten-4">
+    <div class="container">
+      <div class="row">
+      {% for lang in languages %}
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{lang.name}}</span>
+              <p>
+                {{lang.description}}
+              </p>
+            </div>
+
+            <div class="card-action">
+              <a href="{{lang.preview}}">Preview</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

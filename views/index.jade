@@ -3,20 +3,12 @@ extends layout
 block content
   .container
     .row
-      .col.s12.m6
-        .card.blue-grey.darken-1
-          .card-content.white-text
-            .card-title Jade
-            p.
-              This is Jade, and it has a whole series of things that can be 
-              written here!
-          .card-action
-            a(href="/jade/example") Preview
-      .col.s12.m6
-        .card.blue-grey.darken-1
-          .card-content.white-text
-            .card-title EJS
-            p.
-              This one is EJS and there are other things that can be written
-          .card-action
-            a(href="/ejs/example") Preview
+      for lang in languages
+        .col.s12.m6
+          .card.blue-grey.darken-1
+            .card-content.white-text
+              .card-title #{lang.name}
+              p.
+                #{lang.description}
+            .card-action
+              a(href="#{lang.preview}") Preview

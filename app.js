@@ -5,9 +5,10 @@ const express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-    fs = require('fs');
+    fs = require('fs'),
 
-var cons = require('consolidate');
+    cons = require('consolidate'),
+    sb = require('./local_modules/sideburns');
 
 var app = express();
 
@@ -21,14 +22,24 @@ const data = {
       preview: "/jade/example"
     },
     {
+      name: "Sideburns",
+      description: "I made this one :D Sideburns",
+      preview: "/sideburns/example"
+    },
+    {
       name: "EJS",
       description: "This is EJS. Write some stuff here.",
       preview: "/ejs/example"
     },
     {
-      name: "twig",
+      name: "Twig",
       description: "This is twig. Write some stuff here",
       preview: "/twig/example"
+    },
+    {
+      name: "Mustache",
+      description: "This one is a mustache template that there is some more writing for. How interesting!",
+      preview: "/mustache/example"
     }
   ]
 }
@@ -42,7 +53,7 @@ const exts = {
   "mustache" : "mustache"
 }
 
-app.set('view engine', 'jade');
+app.set('view engine', 'twig');
 app.set('views', __dirname + '/views');
 
 // uncomment after placing your favicon in /public
@@ -53,7 +64,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/", require("./routes/main"));
+app.get("/", (req, res) => {
+  res.render("index", data);
+});
 
 app.get("/:engine/:file", function(req, res) {
   const engine = req.params.engine,
@@ -61,17 +74,17 @@ app.get("/:engine/:file", function(req, res) {
   var filepath,
       filesrc,
       local,
-      t;
+      templator;
   filepath = path.join(__dirname, "views", engine, file + "." + exts[engine]);
   filesrc = fs.readFileSync(filepath);
   local = Object.assign(data);
   local.src = filesrc.toString();
   if(engine === "sideburns") {
-    
+    templator = sb;
   } else {
-    t = cons[engine](filepath, local);
+    templator = cons[engine];
   }
-  t.then(f => res.end(f));
+  templator(filepath, local).then(f => res.end(f));
 });
 
 // catch 404 and forward to error handler

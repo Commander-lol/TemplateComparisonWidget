@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>[[title]]</title>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <link rel="stylesheet" href="/stylesheets/materialize.css"/>
+  </head>
+  <body>
+    <h1>[[title]]</h1>
+    <p>
+      Welcome to [[title]]
+    </p>
+    <code><pre>[[!(xml) src]]</pre></code>
+
+    <script src='/js/jquery.js'></style>
+    <script src='/js/materialize.js'></style>
+  </body>
+</html>

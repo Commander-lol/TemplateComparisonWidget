@@ -13,7 +13,24 @@ var app = express();
 
 const data = {
   title: "page",
-  content: ["one", "2", "trois"]
+  content: ["one", "2", "trois"],
+  languages: [
+    {
+      name: "Jade",
+      description: "This is jade. Write some stuff here.",
+      preview: "/jade/example"
+    },
+    {
+      name: "EJS",
+      description: "This is EJS. Write some stuff here.",
+      preview: "/ejs/example"
+    },
+    {
+      name: "twig",
+      description: "This is twig. Write some stuff here",
+      preview: "/twig/example"
+    }
+  ]
 }
 
 const exts = {
@@ -21,7 +38,8 @@ const exts = {
   "ejs": "ejs",
   "sideburns": "sb",
   "haml": "haml",
-  "twig": "twig"
+  "twig": "twig",
+  "mustache" : "mustache"
 }
 
 app.set('view engine', 'jade');
@@ -49,7 +67,7 @@ app.get("/:engine/:file", function(req, res) {
   local = Object.assign(data);
   local.src = filesrc.toString();
   if(engine === "sideburns") {
-
+    
   } else {
     t = cons[engine](filepath, local);
   }

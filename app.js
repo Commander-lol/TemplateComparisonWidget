@@ -8,7 +8,8 @@ const express = require('express'),
     fs = require('fs'),
 
     cons = require('consolidate'),
-    sb = require('./local_modules/sideburns');
+    sb = require('./local_modules/sideburns'),
+    pregen = require("./local_modules/pregen");
 
 var app = express();
 
@@ -75,15 +76,26 @@ app.get("/:engine/:file", function(req, res) {
       filesrc,
       local,
       templator;
+
   filepath = path.join(__dirname, "views", engine, file + "." + exts[engine]);
   filesrc = fs.readFileSync(filepath);
   local = Object.assign(data);
+
   local.src = filesrc.toString();
+  local.lang = engine;
+  local.languagenames = Object.keys(local.languages);
+  local.languagenames = local.languagenames.map(i => local.languages[i].name.toLowerCase());
+
+  let pre = pregen(local);
+  local.pregen = pre;
+  local.pregen.src = "<code><pre>" + local.src + "</pre></code>";
+
   if(engine === "sideburns") {
     templator = sb;
   } else {
     templator = cons[engine];
   }
+
   templator(filepath, local).then(f => res.end(f));
 });
 

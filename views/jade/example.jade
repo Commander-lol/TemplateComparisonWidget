@@ -2,13 +2,45 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='/stylesheets/materialize.css')
+    !{pregen.head}
   body
-    h1= title
-    p Welcome to #{title}
-    code
-      pre #{src}
-      
-    script(src='/js/jquery.js')
-    script(src='/js/materialize.js')
+    !{pregen.header}
+
+    .container
+      #conditionals.row
+        h2 Conditionals
+        p.
+          Jade implements conditional statements with a standard if/else if/else
+          structure, which functions identically to a javascript conditional (i.e.
+          checks for truthy value). This allows templates to check to see if certain
+          data exists before attempting to use it in a block, which in turn makes the
+          templates vastly more flexible.
+        if longPieceOfText
+          h4 A Summers Poem;
+          p #{longPieceOfText}
+        else
+          h4 No Poem :(
+          p.
+            There was no poem found in the data structure, but we checked it with
+            conditionals, so that's all that matters.
+      #looping.row
+        h2 Looping Statements
+        p.
+          Jade provides two main constructs for looping through data structures;
+          the "each" and "while" statements. By embedding Javascript logic within the
+          template, a user can get a segment of HTML to be repeated while the given
+          condition is true using "while". In addition, the "each" statement allows
+          a user to repeat a block of HTML for each piece of data in a list, whilst
+          defining a custom identifier for the currently indexed piece of data.
+        ul.collection
+          each val in books
+            li.collection-item #{val}
+      #scoping.row
+        h2 Block Statements
+        p The current version of Jade does not support block or context statements
+      #source.row
+        h2 Page Source
+        code
+          pre #{src}
+      !{pregen.footer}
+      !{pregen.perf}

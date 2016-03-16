@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-<title> Twig example </title>
-<link rel="stylesheet" href="/stylesheets/style.css" />
+  <title> Twig example </title>
+  {{pregen.head}}
   </head>
     <body>
+      {{pregen.header}}
     SOME HETEROGENEOUS DATA WILL GO HERE
-    <code> <pre>{{src|e}}</pre></code>
+    <code><pre>{{src|e}}</pre></code>
+    {{pregen.footer}}
     </body>
 </html>

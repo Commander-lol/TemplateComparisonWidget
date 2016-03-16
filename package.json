@@ -15,8 +15,11 @@
     "express": "~4.13.1",
     "hamljs": "^0.6.2",
     "jade": "~1.11.0",
+    "microtime": "^2.0.0",
+    "mongoose": "^4.4.7",
     "morgan": "~1.6.1",
     "mustache": "^2.2.1",
+    "node-uuid": "^1.4.7",
     "q": "^1.4.1",
     "serve-favicon": "~2.3.0",
     "twig": "^0.8.8"

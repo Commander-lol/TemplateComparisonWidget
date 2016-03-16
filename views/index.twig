@@ -6,20 +6,28 @@
     <link rel="stylesheet" href="/stylesheets/materialize.css"/>
   </head>
   <body class="brown lighten-4">
+  <nav class="[[colour]] darken-4">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo center cap-title">Template Comparison</a>
+    </div>
+  </nav>
     <div class="container">
       <div class="row">
       {% for lang in languages %}
         <div class="col s12 m6">
-          <div class="card blue-grey darken-1">
+          <div class="card {{lang.colour}} darken-4">
             <div class="card-content white-text">
               <span class="card-title">{{lang.name}}</span>
               <p>
                 {{lang.description}}
               </p>
+              <p>
+                <span class="badge teal white-text">Average Execution Time: <span>{{lang.average}}ms</span></span>
+              </p>
             </div>
 
             <div class="card-action">
-              <a href="{{lang.preview}}">Preview</a>
+              <a href="{{lang.preview}}" class="blue-text darken-text-2">Preview</a>
             </div>
           </div>
         </div>

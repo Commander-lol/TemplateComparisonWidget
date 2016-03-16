@@ -1,15 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%- title %></title>
-  <%- pregen.head %>
-</head>
-  <%- pregen.header %>
-  <h1><%- title %></h1>
-  <p>
-    Welcome to <%= title %>
-  </p>
-  <code><pre><%= src %></pre></code>
-  <%- pregen.footer %>
-  <%- pregen.perf %>
+  <head>
+    <title><%= title %></title>
+    <%- pregen.head %>
+  </head>
+  <body>
+    <%-pregen.header%>
+    <div class="container">
+      <section class="row" id="conditionals">
+        <h2>Conditional Logic</h2>
+        <p class="col s12">
+          EJS (Embedded JavaScript) functions by embedding snippets of javascript
+          into the template within tags. These javascript snippets operate under
+          the context of the data object that was provided to the template
+          renderer, but certain considerations must be made. To perform a check
+          to see if the data context contains a particular property, the name of
+          the property must be prepended with "locals." in order to provide expected
+          behaviour. This makes EJS less useful in situations where you do not
+          know the exact nature of the content, as large sections will need to
+          be wrapped in these existance checks.
+        </p>
+        <% if(!locals.longPieceOfText) {%>
+          <h4>No Poem :(</h4>
+          <p>
+            There was no poem found in the data structure, but we checked it with
+            conditionals, so that's all that matters.
+          </p>
+        <% } %>
+      </section>
+
+      <section class="row" id="looping">
+        <h2>Looping Statements</h2>
+        <p class="col s12">
+          Using standard javascript loops to iterate over arrays provides some
+          benefits over other lanugages; it is more apparent how and where the
+          data is being sourced - the most obvious contrast to this would be
+          and iterative statement in <a href="/mustache/example#looping">mustache</a>,
+          where the current index is accessed with a single period. There are,
+          however, some shortcomings in how EJS currently handles EcmaScript 6
+          features on platforms that support them. The example presented here
+          is the need to wrap the looping statement in an anonymous function in
+          order to use a block scoped "let" variable decleration for the iteration
+          variable.
+        </p>
+
+        <ul class="collection">
+        <% (()=>{"use strict"; for(let i = 0; i < books.length; i += 1) { %>
+          <li class="collection-item"><%= books[i] %></li>
+        <% }}()) %>
+        </ul>
+      </section>
+
+      <section class="row" id="scoping">
+        <h2>Block Statements</h2>
+        <p class="col s12">
+          The current version of EJS does not support block or context statements
+        </p>
+      </section>
+
+      <section class="row" id="source">
+        <h2>Page Source</h2>
+        <code><pre><%=src%></pre></code>
+      </section>
+      <%-pregen.footer%>
+      <%-pregen.perf%>
+    </div>
+  </body>
 </html>

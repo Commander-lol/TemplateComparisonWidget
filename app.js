@@ -19,7 +19,7 @@ const express = require('express'),
 var app = express();
 
 const data = {
-  title: "page",
+  title: "Templator",
   content: ["one", "2", "trois"],
   languages: [
     {

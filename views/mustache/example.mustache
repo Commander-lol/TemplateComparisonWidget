@@ -1,15 +1,108 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Mr.American Mustache</title>
+    <title>{{title}}</title>
     {{{pregen.head}}}
   </head>
   <body>
     {{{pregen.header}}}
-    <code><pre>
-      {{ src }}
-    </pre></code>
-    {{{pregen.footer}}}
+    <div class="container">
+      <section class="row" id="conditionals">
+        <h2>Conditional Logic</h2>
+        <p class="col s12">
+          Mustache impements all of its constructs in terms of "blocks", changing
+          the context and operation depending on the type of the data rather than
+          the specific tag used. For conditional statements, the block will only
+          render if the specified tag value exists. In such situations, the
+          <a href="#scoping">context</a> within the block is set to the property
+          defined by the block if the block is an object or array - otherwise
+          the current context is maintained. Mustache also allows use of an
+          inversion operator to perform "else" and "unless" blocks, when used
+          in combination with if blocks or on its own respectively.
+        </p>
+        {{^longPieceOfText}}
+          <h4>No Poem :(</h4>
+          <p>
+            There was no poem found in the data structure, but we checked it with
+            conditionals, so that's all that matters.
+          </p>
+        {{/longPieceOfText}}
+      </section>
+
+      <section class="row" id="looping">
+        <h2>Looping Statements</h2>
+        <p class="col s12">
+          {{=<$$ $$>=}}
+          Loops use the same tag style as conditional and block statements; the
+          difference for loops is accessing the currently indexed data property.
+          using the tags <code>{{.}}</code>. Looping blocks follow the same
+          logical pattern as other block tags, meaning that a non-existant
+          array will cause the data structure to not be rendered instead of
+          crashing, which is the chosen method of handling those situations for
+          other engines. This also allows the use of the aforementioned inversion
+          operator to provide a fallback - this greatly increases the ability of
+          mustache templates to respond better to heterogeneous data sources.
+          <$$={{ }}=$$>
+        </p>
+
+        <ul class="collection">
+        {{#books}}
+          <li class="collection-item">{{.}}</li>
+        {{/books}}
+        </ul>
+      </section>
+
+      <section class="row" id="scoping">
+        <h2>Block Statements</h2>
+        <p class="col s12">
+          Mustache context structures, once again, operate identically to other
+          tags in the language. For contect blocks, the data in the tag must
+          be a JSON object, and this will set the tags within that block to be
+          resolved relative to that object (Making tags like "animal"
+          functionally equivalant to "likes.animal", if the block tag was for
+          an object called "likes"). This allows for easier to read templates,
+          as it removes potentially long qualifiers at the start of data tags.
+        </p>
+        <div class="col 12 m6">
+          {{#likes}}
+            <h4>Likes</h4>
+            <ul class="collection">
+              <li class="collection-item">
+                Animal: {{animal}}
+              </li>
+              <li class="collection-item">
+                Food: {{food}}
+              </li>
+              <li class="collection-item">
+                Sport: {{sport}}
+              </li>
+            </ul>
+          {{/likes}}
+        </div>
+        <div class="col 12 m6">
+          {{#dislikes}}
+            <h4>Dislikes</h4>
+            <ul class="collection">
+              <li class="collection-item">
+                Animal: {{animal}}
+              </li>
+              <li class="collection-item">
+                Food: {{{food}}}
+              </li>
+              <li class="collection-item">
+                Sport: {{{sport}}}
+              </li>
+            </ul>
+          {{/dislikes}}
+        </div>
+      </section>
+
+      <section class="row" id="source">
+        <h2>Page Source</h2>
+        <code><pre>{{src}}</pre></code>
+      </section>
+      {{{pregen.footer}}}
+      {{{pregen.perf}}}
+    </div>
   </body>
 </html>

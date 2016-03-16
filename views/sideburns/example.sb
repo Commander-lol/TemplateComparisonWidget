@@ -9,19 +9,19 @@
     <div class="container">
       <section class="row" id="conditionals">
         <h2>Conditional Logic</h2>
-        <p>The current version of Sideburns does not support conditional logic</p>
+        <p class="col s12">The current version of Sideburns does not support conditional logic</p>
       </section>
 
       <section class="row" id="looping">
         <h2>Looping Statements</h2>
-        <div class="col s12">
+        <p class="col s12">
           Loops are started by prepending a data tag with an asterisk. The piece of data stored
           at the current index is accessed by using the name of the loop without the last
           character (E.G. if the array being iterated was called "books", the data tag to access
           the current book would be "book"). This convention comes from the assumption that most
           loops are named in a plural manner with an "s" on the end, leading to an intuitive
           access system.
-        </div>
+        </p>
 
         <ul class="collection">
         [[*books]]
@@ -32,14 +32,14 @@
 
       <section class="row" id="scoping">
         <h2>Block Statements</h2>
-        <div class="col s12">
+        <p class="col s12">
           Scoped blocks are defined by prepending a data tag with an ampersand. The use of scoped
           blocks sets the data context within that block to equal the property of the same name.
           For example, if the global data context contained a JSON object under the property "likes",
           using a scoping block with the identifier "likes" would set all identifier within that block
           to be relative to the "likes" JSON object (Making tags like "animal" functionally equivalant
           to "likes.animal").
-        </div>
+        </p>
         <div class="col 12 m6">
           [[&likes]]
             <h4>Likes</h4>

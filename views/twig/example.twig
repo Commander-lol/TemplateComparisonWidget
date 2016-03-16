@@ -1,13 +1,68 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title> Twig example </title>
-  {{pregen.head}}
+    <title>{{title|e}}</title>
+    {{pregen.head}}
   </head>
-    <body>
-      {{pregen.header}}
-    SOME HETEROGENEOUS DATA WILL GO HERE
-    <code><pre>{{src|e}}</pre></code>
-    {{pregen.footer}}
-    </body>
+  <body>
+    {{pregen.header}}
+    <div class="container">
+      <section class="row" id="conditionals">
+        <h2>Conditional Logic</h2>
+        <p class="col s12">
+          Twig uses different types of tags for data and logic; doing so allows
+          the logic tags to have a richer set of operations than some other libraries.
+          There is also a simple syntax for logic tags that makes them more expressive
+          and therefore easier to maintain later down the line. If statements come in
+          two forms - standard comparison checks and tests. The former consists of
+          an expression that evaluates to a boolean value much like JavaScript, whilst
+          the latter takes the form of <code>if *value* is *test*</code>, as well as allowing
+          inversion by adding the "not" keyword. This allows such constructs as
+          <code>if not content is defined</code>.
+        </p>
+        {% if not longPieceOfText is defined %}
+          <h4>No Poem :(</h4>
+          <p>
+            There was no poem found in the data structure, but we checked it with
+            conditionals, so that's all that matters.
+          </p>
+        {% endif %}
+      </section>
+
+      <section class="row" id="looping">
+        <h2>Looping Statements</h2>
+        <p class="col s12">
+          Twig loops allow you to define the name of the currently indexed piece of
+          data, allowing for easier to read and write looping constructs. Twig also
+          allows users to specify conditions in the loops, essentially acting as a
+          filter and allowing the skipping of items. Information about the loop
+          can also be used through the "loop" property that is accessibly within
+          the context of the looping block. This makes Twig loops incredibly powerful,
+          and capable of handling data such as sparse arrays and different first/last
+          element formatting much more easily than other engines.
+        </p>
+
+        <ul class="collection">
+        {% for book in books %}
+          <li class="collection-item">{{book}}</li>
+        {% endfor %}
+        </ul>
+      </section>
+
+      <section class="row" id="scoping">
+        <h2>Block Statements</h2>
+        <p class="col s12">
+          The current version of Twig does not support block or context statements
+          in the manner defined by these comparisons.
+        </p>
+      </section>
+
+      <section class="row" id="source">
+        <h2>Page Source</h2>
+        <code><pre>{{src|e}}</pre></code>
+      </section>
+      {{pregen.footer}}
+      {{pregen.perf}}
+    </div>
+  </body>
 </html>

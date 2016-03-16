@@ -1,7 +1,8 @@
 "use strict";
 const sb = require("bp-sideburns");
 module.exports = function pregen(data) {
-  let head = `<link rel="stylesheet" href="/stylesheets/materialize.css"/>
+  let head = `<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+              <link rel="stylesheet" href="/stylesheets/materialize.css"/>
               <link rel="stylesheet" href="/stylesheets/font-awesome.css"/>
               <link rel="stylesheet" href="/stylesheets/style.css"/>`,
       header = `
@@ -13,7 +14,7 @@ module.exports = function pregen(data) {
         <nav class="[[colour]] darken-4">
           <div class="nav-wrapper">
             <a href="/" class="brand-logo center cap-title">[[lang]]</a>
-            <ul id="nav-main" class="right hide-on-med-and-down">
+            <ul id="nav-main" class="right">
               <li><a class="dropdown-button" href="#" data-activates="languageDropdown">Languages<i class="fa fa-chevron-circle-down right"></i></a></li>
             </ul>
           </div>
